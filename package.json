@@ -1,0 +1,16 @@
+{
+  "name": "html-velocity-loader",
+  "version": "1.0.8",
+  "description": "html velocity loader",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "lauxinyi",
+  "license": "ISC",
+  "dependencies": {
+    "loader-utils": "^0.2.15",
+    "path": "^0.12.7",
+    "velocityjs": "^1.1.3"
+  }
+}
