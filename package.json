@@ -1,6 +1,6 @@
 {
   "name": "html-velocity-loader",
-  "version": "1.0.8",
+  "version": "1.1.0",
   "description": "html velocity loader",
   "main": "index.js",
   "scripts": {
@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "loader-utils": "^0.2.15",
+    "mockjs": "^1.0.1-beta3",
     "path": "^0.12.7",
     "velocityjs": "^1.1.3"
   }
