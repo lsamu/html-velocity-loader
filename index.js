@@ -1,4 +1,5 @@
 /**
+ * https://github.com/lsamu/html-velocity-loader
  * 使用mock 生成数据
  * 动态加载模板
  * 开发模式使用模板   
@@ -42,7 +43,7 @@ module.exports = function (fileContent) {
     } else {
         fileContent = JSON.stringify(fileContent);
     }
-    
+
     return "module.exports = " + fileContent;
 }
 
