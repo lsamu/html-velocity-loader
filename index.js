@@ -13,6 +13,7 @@ var path = require('path');
 var loaderUtils = require("loader-utils");
 var Velocity = require('velocityjs');
 var Mock = require('mockjs');
+var config_data = require('./lib/config')
 
 module.exports = function (fileContent) {
     // console.log("******************************************************************************************************************************************************");
@@ -21,20 +22,27 @@ module.exports = function (fileContent) {
     var query = loaderUtils.parseQuery(this.query);
     fileContent = query.min === false ? fileContent : fileContent.replace(/\n/g, '');
 
+    fileContent = fileContent.replace("#include","@include@");
+
     let asts = Velocity.parse(fileContent);
     let data = {
-        config: data_config(),
+        config: config_data,
         loop: data_loop(),
+        view: {},
+        list: {},
+        pager: {}
     };
 
     fileContent = (new Velocity.Compile(asts)).render(data);
+
+    fileContent = fileContent.replace("@include@","#include");
 
     if (/module\.exports\s?=/.test(fileContent)) {
         fileContent = fileContent.replace(/module\.exports\s?=\s?/, '');
     } else {
         fileContent = JSON.stringify(fileContent);
     }
-
+    
     return "module.exports = " + fileContent;
 }
 
