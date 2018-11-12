@@ -14,10 +14,9 @@ import path = require('path');
 import loaderUtils = require("loader-utils");
 import Velocity = require('velocityjs');
 import Mock = require('mockjs');
-
 import { Config, Article } from './data';
 
-function init(fileContent: string) {
+export = (fileContent: string) => {
     let query = loaderUtils.parseQuery(this.query);
     fileContent = query.min === false ? fileContent : fileContent.replace(/\n/g, '');
     fileContent = fileContent.replace("#include", "@include@");
@@ -41,8 +40,7 @@ function init(fileContent: string) {
     }
 
     return "module.exports = " + fileContent;
-}
-export = init;
+};
 
 /**
  * 全局配置

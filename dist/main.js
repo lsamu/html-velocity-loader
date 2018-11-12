@@ -1,29 +1,8 @@
 "use strict";
+var _this = this;
 var loaderUtils = require("loader-utils");
 var Velocity = require("velocityjs");
 var Mock = require("mockjs");
-function init(fileContent) {
-    var query = loaderUtils.parseQuery(this.query);
-    fileContent = query.min === false ? fileContent : fileContent.replace(/\n/g, '');
-    fileContent = fileContent.replace("#include", "@include@");
-    var asts = Velocity.parse(fileContent);
-    var data = {
-        config: data_config(),
-        loop: data_loop(),
-        view: {},
-        list: {},
-        pager: {}
-    };
-    fileContent = (new Velocity.Compile(asts)).render(data);
-    fileContent = fileContent.replace("@include@", "#include");
-    if (/module\.exports\s?=/.test(fileContent)) {
-        fileContent = fileContent.replace(/module\.exports\s?=\s?/, '');
-    }
-    else {
-        fileContent = JSON.stringify(fileContent);
-    }
-    return "module.exports = " + fileContent;
-}
 function data_config() {
     var config_data = {
         site_title: "V5软件网"
@@ -141,4 +120,25 @@ function data_loop() {
         }
     };
 }
-module.exports = init;
+module.exports = function (fileContent) {
+    var query = loaderUtils.parseQuery(_this.query);
+    fileContent = query.min === false ? fileContent : fileContent.replace(/\n/g, '');
+    fileContent = fileContent.replace("#include", "@include@");
+    var asts = Velocity.parse(fileContent);
+    var data = {
+        config: data_config(),
+        loop: data_loop(),
+        view: {},
+        list: {},
+        pager: {}
+    };
+    fileContent = (new Velocity.Compile(asts)).render(data);
+    fileContent = fileContent.replace("@include@", "#include");
+    if (/module\.exports\s?=/.test(fileContent)) {
+        fileContent = fileContent.replace(/module\.exports\s?=\s?/, '');
+    }
+    else {
+        fileContent = JSON.stringify(fileContent);
+    }
+    return "module.exports = " + fileContent;
+};

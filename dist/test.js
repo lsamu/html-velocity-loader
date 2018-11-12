@@ -4,6 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var main_1 = __importDefault(require("./main"));
-var template = "\n<h1>${config.site_title}</h1> \n\n#foreach($row in $loop.list(\"article-list\")) \n    <a href=\"#\">\n    $row.title \n    </a>\n#end\n\n";
+var template = "\n<h1>${config.site_title}</h1> \n\n#foreach($row in $loop.list(\"article-list\")) \n    <li>\n    <a href=\"#\">\n    $row.title \n    </a>  \n    </li>\n#end\n\n";
 var html = main_1.default(template);
 console.log(html);
